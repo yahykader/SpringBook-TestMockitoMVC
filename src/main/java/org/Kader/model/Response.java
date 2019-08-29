@@ -7,10 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Response implements Serializable{
 
 	/**
@@ -20,5 +16,32 @@ public class Response implements Serializable{
 	
 	private String message;
 	private boolean success;
+	
+	public Response() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Response(String message, boolean success) {
+		super();
+		this.message = message;
+		this.success = success;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+	
 
 }

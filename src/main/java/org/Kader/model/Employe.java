@@ -6,13 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-@Setter
-@Getter
-
 @Entity
 public class Employe implements Serializable{
 	
@@ -21,6 +14,41 @@ public class Employe implements Serializable{
 	private Long id;
 	private String name;
 	private String dept;
+	
+	public Employe() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Employe(String name, String dept) {
+		super();
+		this.name = name;
+		this.dept = dept;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	
 	
 
 }
