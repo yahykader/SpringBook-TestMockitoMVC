@@ -6,6 +6,7 @@ import org.Kader.model.Employe;
 import org.Kader.model.Response;
 import org.Kader.repository.EmployeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public class EmployeController {
 	@Autowired
 	private EmployeRepository employeRepository;
 	
-	@PostMapping(value="/addEmploye")
+	@PostMapping(value="/addEmploye",produces=MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Response addEmploye(@RequestBody Employe employe) {
 		 employeRepository.save(employe);
 		 return new Response(employe.getId()+ "inserted",Boolean.TRUE);

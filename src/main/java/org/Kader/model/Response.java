@@ -2,10 +2,6 @@ package org.Kader.model;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 public class Response implements Serializable{
 
@@ -15,16 +11,16 @@ public class Response implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String message;
-	private boolean success;
+	private boolean status;
 	
 	public Response() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Response(String message, boolean success) {
+	public Response(String message, boolean status) {
 		super();
 		this.message = message;
-		this.success = success;
+		this.status = status;
 	}
 
 	public String getMessage() {
@@ -35,12 +31,12 @@ public class Response implements Serializable{
 		this.message = message;
 	}
 
-	public boolean isSuccess() {
-		return success;
+	public boolean isStatus() {
+		return status;
 	}
 
-	public void setSuccess(boolean success) {
-		this.success = success;
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 

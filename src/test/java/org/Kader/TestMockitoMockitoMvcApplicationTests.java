@@ -1,5 +1,6 @@
 package org.Kader;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -19,9 +20,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
-@SuppressWarnings("deprecation")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestMockitoMockitoMvcApplicationTests {
@@ -34,7 +34,7 @@ public class TestMockitoMockitoMvcApplicationTests {
 	private ObjectMapper om=new ObjectMapper();
 	
 	@Before
-	private void setUp() {
+	public void setUp() {
 		mockMvc=MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
@@ -46,22 +46,22 @@ public class TestMockitoMockitoMvcApplicationTests {
 		String jsonRequest=om.writeValueAsString(employe);
 		
 		MvcResult result=mockMvc.perform(post("/employe/addEmploye").content(jsonRequest)
-														   .content(MediaType.APPLICATION_JSON_VALUE))
-														   .andExpect(status().isOk()).andReturn();
+																    .content(MediaType.APPLICATION_JSON_VALUE))
+														            .andExpect(status().isOk()).andReturn();
 		String resultContent=result.getResponse().getContentAsString();
 		Response reponse=om.readValue(resultContent, Response.class);
-		Assert.assertTrue(reponse.isSuccess()==Boolean.TRUE);
+		Assert.assertTrue(reponse.isStatus()==Boolean.TRUE);
 	}
 	
 	@Test
 	public void getEmployeTest() throws Exception {
 
-		MvcResult result=mockMvc.perform(post("/employe/addEmploye")
+		MvcResult result=mockMvc.perform(get("/employe/getAllEmployes")
 														   .content(MediaType.APPLICATION_JSON_VALUE))
 														   .andExpect(status().isOk()).andReturn();
 		String resultContent=result.getResponse().getContentAsString();
 		Response reponse=om.readValue(resultContent, Response.class);
-		Assert.assertTrue(reponse.isSuccess()==Boolean.TRUE);
+		Assert.assertTrue(reponse.isStatus()==Boolean.TRUE);
 	}
 
 }
