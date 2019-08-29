@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -22,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import junit.framework.Assert;
 
+@SuppressWarnings("deprecation")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestMockitoMockitoMvcApplicationTests {
@@ -38,7 +38,6 @@ public class TestMockitoMockitoMvcApplicationTests {
 		mockMvc=MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void addEmployeTest() throws Exception {
 		Employe employe=new Employe();
@@ -47,6 +46,17 @@ public class TestMockitoMockitoMvcApplicationTests {
 		String jsonRequest=om.writeValueAsString(employe);
 		
 		MvcResult result=mockMvc.perform(post("/employe/addEmploye").content(jsonRequest)
+														   .content(MediaType.APPLICATION_JSON_VALUE))
+														   .andExpect(status().isOk()).andReturn();
+		String resultContent=result.getResponse().getContentAsString();
+		Response reponse=om.readValue(resultContent, Response.class);
+		Assert.assertTrue(reponse.isSuccess()==Boolean.TRUE);
+	}
+	
+	@Test
+	public void getEmployeTest() throws Exception {
+
+		MvcResult result=mockMvc.perform(post("/employe/addEmploye")
 														   .content(MediaType.APPLICATION_JSON_VALUE))
 														   .andExpect(status().isOk()).andReturn();
 		String resultContent=result.getResponse().getContentAsString();
